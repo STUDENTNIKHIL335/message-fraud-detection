@@ -414,7 +414,15 @@ def analyze_heuristics(message: str, urls: List[str]):
     }
 
 
+# Health check endpoint
+@app.get("/api/health")
+@app.get("/health")
+def health():
+    return {"status": "ok", "app": "ScamShield"}
+
+
 @app.post("/api/basic-scan", response_model=BasicScanResponse)
+@app.post("/basic-scan", response_model=BasicScanResponse)
 def basic_scan(payload: BasicScanRequest):
     """
     Tier 1: Instant Local ML + Rule-Based Heuristic Analysis.
@@ -485,6 +493,7 @@ def basic_scan(payload: BasicScanRequest):
 
 
 @app.post("/api/deep-scan", response_model=DeepScanResponse)
+@app.post("/deep-scan", response_model=DeepScanResponse)
 def deep_scan(payload: DeepScanRequest):
     """
     Tier 2: Deep Truth Verification via Gemini with Google Search Grounding.
@@ -671,6 +680,7 @@ SITE_GUIDE_KNOWLEDGE = {
 }
 
 @app.post("/api/ai-guide", response_model=GuideResponse)
+@app.post("/ai-guide", response_model=GuideResponse)
 async def ai_guide_endpoint(req: GuideRequest):
     """
     Interactive AI Agent Guide that explains all details, architecture,
