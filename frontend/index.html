@@ -14,19 +14,33 @@
       theme: {
         extend: {
           colors: {
+            babypink: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+              900: '#831843',
+              950: '#500724',
+            },
             cyber: {
-              950: '#070b14',
-              900: '#0b1120',
-              850: '#0f172a',
-              800: '#1e293b',
-              700: '#334155',
+              950: '#0e0713',
+              900: '#160d1e',
+              850: '#1f122a',
+              800: '#2c1b3b',
+              700: '#3e2753',
             },
             neon: {
+              pink: '#f472b6',
+              rose: '#fb7185',
               blue: '#38bdf8',
               emerald: '#10b981',
               amber: '#f59e0b',
-              rose: '#f43f5e',
-              purple: '#a855f7'
+              purple: '#c084fc'
             }
           },
           fontFamily: {
@@ -48,27 +62,27 @@
 
   <style>
     body {
-      background-color: #070b14;
+      background-color: #0c0612;
       background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
-        radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(244, 114, 182, 0.16) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(249, 168, 212, 0.13) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(236, 72, 153, 0.08) 0px, transparent 50%);
       background-attachment: fixed;
     }
     .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(22, 12, 30, 0.78);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(244, 114, 182, 0.18);
     }
     .glass-panel-glow {
-      box-shadow: 0 0 25px -5px rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 30px -5px rgba(244, 114, 182, 0.22);
     }
     .cyber-grid {
       background-size: 32px 32px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(to right, rgba(244, 114, 182, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(244, 114, 182, 0.04) 1px, transparent 1px);
     }
     /* Circular Gauge Animation */
     .gauge-circle {
@@ -78,11 +92,11 @@
     .prose-scam h3 {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #38bdf8;
+      color: #f472b6;
       margin-top: 1.5rem;
       margin-bottom: 0.75rem;
       padding-bottom: 0.35rem;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      border-bottom: 1px solid rgba(244, 114, 182, 0.25);
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -96,13 +110,13 @@
       list-style-type: disc;
       padding-left: 1.5rem;
       margin-bottom: 1rem;
-      color: #94a3b8;
+      color: #f9a8d4;
     }
     .prose-scam li {
       margin-bottom: 0.4rem;
     }
     .prose-scam strong {
-      color: #f8fafc;
+      color: #fff;
       font-weight: 600;
     }
     .prose-scam table {
@@ -112,16 +126,16 @@
       font-size: 0.9rem;
     }
     .prose-scam th {
-      background: rgba(30, 41, 59, 0.8);
-      color: #38bdf8;
+      background: rgba(44, 25, 62, 0.85);
+      color: #f9a8d4;
       padding: 0.6rem 0.8rem;
       text-align: left;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(244, 114, 182, 0.22);
     }
     .prose-scam td {
       padding: 0.6rem 0.8rem;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: #cbd5e1;
+      border: 1px solid rgba(244, 114, 182, 0.1);
+      color: #e2e8f0;
     }
     /* Pulse glow */
     @keyframes pulse-glow {
@@ -133,41 +147,41 @@
     }
   </style>
 </head>
-<body class="min-h-screen text-slate-100 font-sans cyber-grid selection:bg-cyan-500 selection:text-black">
+<body class="min-h-screen text-slate-100 font-sans cyber-grid selection:bg-pink-300 selection:text-pink-950">
 
   <!-- Top Navigation Header -->
-  <header class="border-b border-white/10 glass-panel sticky top-0 z-50">
+  <header class="border-b border-pink-500/20 glass-panel sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 ring-1 ring-white/20">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-500 flex items-center justify-center shadow-lg shadow-pink-500/30 ring-1 ring-pink-300/40">
+          <svg class="w-6 h-6 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">ScamShield</span>
-            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-400 border border-cyan-800">Two-Tier AI</span>
+            <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">ScamShield</span>
+            <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-pink-950/80 text-pink-300 border border-pink-700/50">Two-Tier AI</span>
           </div>
-          <p class="text-xs text-slate-400 hidden sm:block">Suspicious Message & Link Threat Detector</p>
+          <p class="text-xs text-pink-200/60 hidden sm:block">Suspicious Message & Link Threat Detector</p>
         </div>
       </div>
 
       <!-- Right Action Items & Status -->
       <div class="flex items-center gap-3">
         <!-- Live System Status Badge -->
-        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-emerald-500/30 text-xs">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-emerald-400 font-mono font-medium">Local ML Active</span>
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-pink-500/30 text-xs">
+          <span class="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></span>
+          <span class="text-pink-300 font-mono font-medium">Local ML Active</span>
           <span class="text-slate-600">|</span>
-          <span class="text-slate-400">Gemini Grounded</span>
+          <span class="text-slate-300">Gemini Grounded</span>
         </div>
 
         <!-- API Key Settings Button -->
-        <button id="btnOpenKeyModal" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-white/10 hover:border-cyan-500/40 transition">
-          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="btnOpenKeyModal" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-pink-500/30 hover:border-pink-400 transition">
+          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
           </svg>
           <span id="keyStatusText">API Key</span>
@@ -190,35 +204,35 @@
 
     <!-- Hero Title Section -->
     <div class="text-center max-w-3xl mx-auto space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-mono">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-950/60 border border-pink-400/40 text-pink-300 text-xs font-mono">
+        <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
         Instant Local ML (ms) + Live Web Grounding via Gemini
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-        Zero-Day <span class="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 bg-clip-text text-transparent">Scam & Phishing</span> Detector
+        Zero-Day <span class="bg-gradient-to-r from-pink-300 via-pink-400 to-rose-300 bg-clip-text text-transparent">Scam & Phishing</span> Detector
       </h1>
-      <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+      <p class="text-pink-100/70 text-sm sm:text-base leading-relaxed">
         Paste any SMS, WhatsApp alert, or unverified link. Scan instantly with local ML heuristics, then verify the exact domains and entities against live web data.
       </p>
     </div>
 
     <!-- Scanner Input Card -->
-    <div class="glass-panel glass-panel-glow rounded-2xl p-5 sm:p-7 shadow-2xl border border-white/10 relative overflow-hidden">
+    <div class="glass-panel glass-panel-glow rounded-2xl p-5 sm:p-7 shadow-2xl border border-pink-500/20 relative overflow-hidden">
       
       <!-- Card Top Bar -->
-      <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10 text-xs font-mono text-slate-400">
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-pink-500/10 text-xs font-mono text-slate-400">
         <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
-          <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
-          <span class="text-slate-500 ml-2">threat-detector:~/input$</span>
+          <span class="w-3 h-3 rounded-full bg-pink-400 inline-block shadow-sm shadow-pink-400"></span>
+          <span class="w-3 h-3 rounded-full bg-rose-400 inline-block"></span>
+          <span class="w-3 h-3 rounded-full bg-pink-300 inline-block"></span>
+          <span class="text-pink-300/70 ml-2">threat-detector:~/input$</span>
         </div>
         <div class="flex items-center gap-3">
-          <span id="charCounter" class="text-slate-500">0 characters</span>
-          <button id="btnPasteClipboard" class="hover:text-cyan-400 transition flex items-center gap-1">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span id="charCounter" class="text-pink-300/60">0 characters</span>
+          <button id="btnPasteClipboard" class="hover:text-pink-300 transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
             Paste
@@ -238,20 +252,20 @@
           id="messageInput"
           rows="4"
           placeholder="Paste suspicious SMS, WhatsApp message, or link here... (e.g., 'SBI YONO account suspended', 'India Post parcel address update', 'Kaun Banega Crorepati lottery prize', or genuine OTP)"
-          class="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl p-4 text-slate-100 placeholder-slate-500 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 font-mono resize-y min-h-[110px]"
+          class="w-full bg-slate-950/70 border border-pink-500/25 rounded-xl p-4 text-slate-100 placeholder-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400 font-mono resize-y min-h-[110px]"
         ></textarea>
       </div>
 
       <!-- One-Click Demo Sample Buttons -->
-      <div class="mt-4 pt-4 border-t border-white/5 space-y-2">
+      <div class="mt-4 pt-4 border-t border-pink-500/10 space-y-2">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-xs font-semibold uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             One-Click Test Scenarios (Demo Samples):
           </span>
-          <span class="text-[11px] text-slate-500 font-mono">Click to test instant detection</span>
+          <span class="text-[11px] text-pink-300/60 font-mono">Click to test instant detection</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
@@ -282,11 +296,11 @@
           <!-- Sample 3: Fake Govt Scheme -->
           <button 
             data-sample="fake-govt"
-            class="sample-btn text-left p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-purple-500/30 hover:border-purple-400 transition group relative"
+            class="sample-btn text-left p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-pink-500/30 hover:border-pink-400 transition group relative"
           >
-            <div class="flex items-center justify-between text-xs font-bold text-purple-400 mb-1">
+            <div class="flex items-center justify-between text-xs font-bold text-pink-300 mb-1">
               <span class="flex items-center gap-1.5">🏛️ Fake Govt Scheme</span>
-              <span class="text-[10px] px-1.5 py-0.2 rounded bg-purple-950/80 border border-purple-800 font-mono">SCAM</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-pink-950/80 border border-pink-800 font-mono">SCAM</span>
             </div>
             <p class="text-[11px] text-slate-400 line-clamp-2">"PM Mudra Loan Scheme: Approved loan of ₹5,00,000 with 50% subsidy. Register: http://bit.ly/pm-mudra-yojana-apply..."</p>
           </button>
@@ -309,20 +323,20 @@
       <div class="mt-6 flex flex-col sm:flex-row items-center gap-3">
         <button
           id="btnBasicScan"
-          class="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 font-bold text-white shadow-lg shadow-cyan-500/25 transition active:scale-[0.98]"
+          class="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-slate-950 shadow-lg shadow-pink-500/30 transition active:scale-[0.98]"
         >
-          <svg class="w-5 h-5 text-cyan-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
           <span>Run Basic Search (Instant ML Risk Scan)</span>
-          <span class="text-xs px-2 py-0.5 rounded bg-white/20 font-mono font-normal">Local ms</span>
+          <span class="text-xs px-2 py-0.5 rounded bg-black/20 font-mono font-bold text-slate-950">Local ms</span>
         </button>
 
         <button
           id="btnDirectDeepScan"
-          class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-cyan-500/30 hover:border-cyan-400 text-cyan-300 font-medium text-sm flex items-center justify-center gap-2 transition"
+          class="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-pink-400/40 hover:border-pink-300 text-pink-300 font-medium text-sm flex items-center justify-center gap-2 transition"
         >
-          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <span>Deep Search Directly (Gemini)</span>
@@ -332,7 +346,7 @@
     </div>
 
     <!-- Tier 1: Basic Search Results Card (Hidden by Default) -->
-    <div id="basicResultCard" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 shadow-xl transition-all duration-300">
+    <div id="basicResultCard" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-pink-500/20 shadow-xl transition-all duration-300">
       
       <!-- Top Header Badge & Verdict -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-white/10">
@@ -378,15 +392,15 @@
 
         <!-- Telemetry Breakdown Chips -->
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <div class="bg-slate-900/80 p-3 rounded-xl border border-white/5">
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-pink-500/10">
             <span class="text-[10px] uppercase font-mono text-slate-400 block">ML Confidence</span>
-            <span id="mlProbVal" class="text-base font-bold font-mono text-cyan-400">92.4%</span>
+            <span id="mlProbVal" class="text-base font-bold font-mono text-pink-300">92.4%</span>
           </div>
-          <div class="bg-slate-900/80 p-3 rounded-xl border border-white/5">
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-pink-500/10">
             <span class="text-[10px] uppercase font-mono text-slate-400 block">URLs Detected</span>
             <span id="urlsCountVal" class="text-base font-bold font-mono text-amber-400">1 Link</span>
           </div>
-          <div class="bg-slate-900/80 p-3 rounded-xl border border-white/5 col-span-2 sm:col-span-1">
+          <div class="bg-slate-900/80 p-3 rounded-xl border border-pink-500/10 col-span-2 sm:col-span-1">
             <span class="text-[10px] uppercase font-mono text-slate-400 block">Red Flags</span>
             <span id="redFlagsCountVal" class="text-base font-bold font-mono text-rose-400">4 Triggered</span>
           </div>
@@ -395,23 +409,23 @@
       </div>
 
       <!-- AI Companion Banner (Jensen Huang) -->
-      <div id="aiGirlCard" class="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-emerald-500/30 shadow-lg relative overflow-hidden transition-all duration-300">
+      <div id="aiGirlCard" class="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-pink-400/40 shadow-lg relative overflow-hidden transition-all duration-300">
         
         <!-- Glowing Ambient Accent -->
-        <div id="aiGirlGlow" class="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-emerald-500/20 blur-2xl pointer-events-none"></div>
+        <div id="aiGirlGlow" class="absolute -top-12 -left-12 w-32 h-32 rounded-full bg-pink-400/20 blur-2xl pointer-events-none"></div>
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
           
           <!-- Avatar Icon with Animated Headset/Ring -->
           <div class="relative shrink-0">
-            <div id="aiGirlAvatarRing" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-emerald-400 via-cyan-500 to-indigo-600 p-1 shadow-xl shadow-emerald-500/30 transition-all duration-500">
+            <div id="aiGirlAvatarRing" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-600 p-1 shadow-xl shadow-pink-500/30 transition-all duration-500">
               <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center overflow-hidden relative">
                 <!-- Jensen Huang Avatar Image -->
                 <img src="/static/jensen.jpg" alt="Jensen Huang AI Cyber Advisor" class="w-full h-full object-cover rounded-xl shadow-md transform hover:scale-105 transition duration-300" />
               </div>
             </div>
             <!-- Online status badge -->
-            <span id="aiGirlStatusDot" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-slate-900 flex items-center justify-center">
+            <span id="aiGirlStatusDot" class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-pink-400 border-2 border-slate-900 flex items-center justify-center">
               <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
             </span>
           </div>
@@ -420,15 +434,15 @@
           <div class="flex-1 space-y-2">
             <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-2">
-                <span class="text-xs font-mono font-bold tracking-wider text-emerald-400 uppercase flex items-center gap-1.5">
+                <span class="text-xs font-mono font-bold tracking-wider text-pink-300 uppercase flex items-center gap-1.5">
                   <span id="aiGirlName">Jensen Huang</span> • Chief Cyber Defense Advisor
                 </span>
-                <span id="aiGirlVoiceWave" class="flex items-center gap-0.5 h-3 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/30">
-                  <span class="w-0.5 h-2 bg-emerald-400 rounded-full animate-bounce"></span>
-                  <span class="w-0.5 h-3 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
-                  <span class="w-0.5 h-1.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
-                  <span class="w-0.5 h-2.5 bg-emerald-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
-                  <span class="text-[9px] font-mono text-emerald-300 ml-1">AI Male Voice</span>
+                <span id="aiGirlVoiceWave" class="flex items-center gap-0.5 h-3 px-2 py-0.5 rounded-full bg-pink-950/80 border border-pink-400/30">
+                  <span class="w-0.5 h-2 bg-pink-400 rounded-full animate-bounce"></span>
+                  <span class="w-0.5 h-3 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.15s"></span>
+                  <span class="w-0.5 h-1.5 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+                  <span class="w-0.5 h-2.5 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+                  <span class="text-[9px] font-mono text-pink-200 ml-1">AI Male Voice</span>
                 </span>
               </div>
 
@@ -436,10 +450,10 @@
               <div class="flex items-center gap-2">
                 <button
                   id="btnSpeakAgain"
-                  class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-xs text-emerald-300 hover:text-white border border-emerald-500/30 hover:border-emerald-400 flex items-center gap-1.5 transition active:scale-95 shadow-sm font-medium"
+                  class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-xs text-pink-300 hover:text-white border border-pink-400/30 hover:border-pink-300 flex items-center gap-1.5 transition active:scale-95 shadow-sm font-medium"
                   title="Listen to Jensen's AI Male Voice Alert"
                 >
-                  <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                   <span>🔊 Listen to Jensen (AI Male Voice)</span>
@@ -463,7 +477,7 @@
       <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- Detected Red Flags List -->
-        <div class="bg-slate-950/60 rounded-xl p-4 border border-white/5">
+        <div class="bg-slate-950/60 rounded-xl p-4 border border-pink-500/10">
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-xs uppercase font-mono tracking-wider font-semibold text-slate-300 flex items-center gap-1.5">
               <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -479,15 +493,15 @@
         </div>
 
         <!-- Extracted URLs List -->
-        <div class="bg-slate-950/60 rounded-xl p-4 border border-white/5">
+        <div class="bg-slate-950/60 rounded-xl p-4 border border-pink-500/10">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-xs uppercase font-mono tracking-wider font-semibold text-slate-300 flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h3 class="text-xs uppercase font-mono tracking-wider font-semibold text-pink-300 flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
               </svg>
               Extracted URLs & Web Domains
             </h3>
-            <span id="urlsBadgeCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800">0 Links</span>
+            <span id="urlsBadgeCount" class="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-700/50">0 Links</span>
           </div>
           <div id="urlsContainer" class="space-y-2 text-xs">
             <!-- Dynamic URLs Injected -->
@@ -497,27 +511,27 @@
       </div>
 
       <!-- Prominent Call-to-Action for Deep Search -->
-      <div class="mt-8 pt-6 border-t border-white/10 bg-gradient-to-r from-cyan-950/40 via-indigo-950/30 to-purple-950/40 rounded-xl p-5 border border-cyan-500/20 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="mt-8 pt-6 border-t border-pink-500/10 bg-gradient-to-r from-pink-950/40 via-purple-950/30 to-pink-950/40 rounded-xl p-5 border border-pink-500/25 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
-            <span class="text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-cyan-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span class="text-xs font-mono font-bold text-pink-300 uppercase tracking-wider flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-pink-400 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
               Want Complete Truth & Live Web Verification?
             </span>
           </div>
           <p class="text-xs text-slate-300 max-w-xl">
-            Run an in-depth investigation with <strong class="text-white">Gemini + Google Search Grounding</strong>. Cross-references claimed entities, verifies genuine official bank portals, checks recent police FIRs, and provides certified safety steps.
+            Run an in-depth investigation with <strong class="text-pink-200">Gemini + Google Search Grounding</strong>. Cross-references claimed entities, verifies genuine official bank portals, checks recent police FIRs, and provides certified safety steps.
           </p>
         </div>
 
         <button
           id="btnTriggerDeepScan"
-          class="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-500/25 transition active:scale-[0.98] shrink-0 flex items-center justify-center gap-2"
+          class="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 hover:from-pink-300 hover:to-rose-300 text-slate-950 font-bold text-sm shadow-xl shadow-pink-500/30 transition active:scale-[0.98] shrink-0 flex items-center justify-center gap-2"
         >
-          <svg class="w-4 h-4 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <span>Run Deep Search (Gemini Live Web Check)</span>
         </button>
@@ -526,28 +540,28 @@
     </div>
 
     <!-- Tier 2: Deep Search Results Card (Hidden by Default) -->
-    <div id="deepResultCard" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-cyan-500/30 shadow-2xl transition-all duration-300">
+    <div id="deepResultCard" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-pink-500/30 shadow-2xl transition-all duration-300">
       
       <!-- Deep Scan Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-white/10">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-pink-500/10">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-500 flex items-center justify-center shadow-lg shadow-pink-500/25 ring-1 ring-pink-300/40">
+            <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
           <div>
             <div class="flex items-center gap-2">
               <h2 class="text-xl font-bold text-white">Gemini Live Web Grounded Investigation</h2>
-              <span id="geminiModelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-950/80 text-indigo-300 border border-indigo-700">gemini-4-hydrogen</span>
+              <span id="geminiModelBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-700/50">gemini-4-hydrogen</span>
             </div>
-            <p class="text-xs text-slate-400">Cybersecurity forensic report with live Google Search citations</p>
+            <p class="text-xs text-pink-200/60">Cybersecurity forensic report with live Google Search citations</p>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
-          <button id="btnCopyReport" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-white/10 flex items-center gap-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button id="btnCopyReport" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-pink-200 border border-pink-500/20 hover:border-pink-400/40 flex items-center gap-1.5 transition">
+            <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
             </svg>
             <span>Copy Report</span>
@@ -558,19 +572,19 @@
       <!-- Deep Search Loading State -->
       <div id="deepScanLoading" class="py-12 flex flex-col items-center justify-center text-center space-y-4">
         <div class="relative w-16 h-16">
-          <div class="w-16 h-16 rounded-full border-4 border-cyan-500/20 border-t-cyan-400 animate-spin"></div>
+          <div class="w-16 h-16 rounded-full border-4 border-pink-500/20 border-t-pink-400 animate-spin"></div>
           <div class="absolute inset-0 flex items-center justify-center">
-            <svg class="w-6 h-6 text-cyan-400 pulse-effect" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-pink-400 pulse-effect" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
         <div>
           <h3 class="text-base font-bold text-white tracking-wide">Searching the Live Web with Gemini...</h3>
-          <p id="deepScanProgressText" class="text-xs text-slate-400 mt-1 font-mono">Querying Google Search grounding tool for real-time domain verification...</p>
+          <p id="deepScanProgressText" class="text-xs text-pink-200/70 mt-1 font-mono">Querying Google Search grounding tool for real-time domain verification...</p>
         </div>
-        <div class="flex items-center gap-2 text-[11px] font-mono text-cyan-400/80 bg-cyan-950/40 px-3 py-1.5 rounded-full border border-cyan-900">
-          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <div class="flex items-center gap-2 text-[11px] font-mono text-pink-300 bg-pink-950/50 px-3 py-1.5 rounded-full border border-pink-700/50">
+          <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-ping"></span>
           <span>Cross-referencing official registries & recent cyber complaints</span>
         </div>
       </div>
@@ -591,20 +605,20 @@
 
       <!-- Rendered Markdown Forensic Analysis Content -->
       <div id="deepScanContent" class="hidden mt-6 space-y-6">
-        <div id="analysisMarkdown" class="prose-scam bg-slate-950/60 rounded-xl p-5 sm:p-6 border border-white/5">
+        <div id="analysisMarkdown" class="prose-scam bg-slate-950/60 rounded-xl p-5 sm:p-6 border border-pink-500/10">
           <!-- Rendered Markdown will be inserted here -->
         </div>
 
         <!-- Verified Web Sources & Citations Section -->
-        <div id="citationsSection" class="pt-6 border-t border-white/10 space-y-3">
+        <div id="citationsSection" class="pt-6 border-t border-pink-500/10 space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="text-xs uppercase font-mono tracking-wider font-semibold text-cyan-400 flex items-center gap-2">
-              <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <h3 class="text-xs uppercase font-mono tracking-wider font-semibold text-pink-300 flex items-center gap-2">
+              <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               Verified Grounded Web Sources & Citations
             </h3>
-            <span id="citationsCountBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800">0 Sources</span>
+            <span id="citationsCountBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-700/50">0 Sources</span>
           </div>
 
           <div id="citationsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -617,15 +631,15 @@
     </div>
 
     <!-- Recent Scans History (LocalStorage) -->
-    <div class="glass-panel rounded-2xl p-6 border border-white/10 shadow-xl space-y-4">
+    <div class="glass-panel rounded-2xl p-6 border border-pink-500/20 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <h2 class="text-sm uppercase font-mono font-bold tracking-wider text-slate-300">Recent Scans History</h2>
+          <h2 class="text-sm uppercase font-mono font-bold tracking-wider text-pink-300">Recent Scans History</h2>
         </div>
-        <button id="btnClearHistory" class="text-xs text-slate-500 hover:text-rose-400 transition font-mono">
+        <button id="btnClearHistory" class="text-xs text-slate-400 hover:text-rose-400 transition font-mono">
           Clear History
         </button>
       </div>
@@ -636,10 +650,10 @@
     </div>
 
     <!-- Official Cybercrime Resources & Disclaimers -->
-    <footer class="pt-6 pb-12 border-t border-white/10 text-xs text-slate-500 space-y-4">
+    <footer class="pt-6 pb-12 border-t border-pink-500/10 text-xs text-slate-500 space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-pink-500/10 space-y-1">
           <div class="font-bold text-slate-300 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-rose-500"></span>
             Police Emergency Helpline
@@ -647,25 +661,25 @@
           <p class="text-[11px] text-slate-400">Dial <a href="tel:100" class="text-rose-400 font-bold underline">100</a> (Toll-Free, 24/7 Police Emergency) for immediate incident reporting and fraud intervention.</p>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-pink-500/10 space-y-1">
           <div class="font-bold text-slate-300 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+            <span class="w-2 h-2 rounded-full bg-pink-400"></span>
             National Cybercrime Portal
           </div>
-          <p class="text-[11px] text-slate-400">File official FIRs and cyber complaints at <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="text-cyan-400 underline">cybercrime.gov.in</a>.</p>
+          <p class="text-[11px] text-slate-400">File official FIRs and cyber complaints at <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="text-pink-300 underline">cybercrime.gov.in</a>.</p>
         </div>
 
-        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-pink-500/10 space-y-1">
           <div class="font-bold text-slate-300 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
             DoT Chakshu / Sanchar Saathi
           </div>
-          <p class="text-[11px] text-slate-400">Report suspect SMS and WhatsApp senders on <a href="https://sancharsaathi.gov.in" target="_blank" rel="noopener noreferrer" class="text-indigo-400 underline">sancharsaathi.gov.in</a>.</p>
+          <p class="text-[11px] text-slate-400">Report suspect SMS and WhatsApp senders on <a href="https://sancharsaathi.gov.in" target="_blank" rel="noopener noreferrer" class="text-purple-300 underline">sancharsaathi.gov.in</a>.</p>
         </div>
 
       </div>
 
-      <div class="text-center pt-4 text-[11px] text-slate-600">
+      <div class="text-center pt-4 text-[11px] text-pink-300/40">
         ScamShield Hackathon Edition • Built with Python, FastAPI, Scikit-Learn & Google Gemini Interactions API
       </div>
     </footer>
@@ -674,10 +688,10 @@
 
   <!-- API Key Modal -->
   <div id="keyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="glass-panel rounded-2xl max-w-md w-full p-6 border border-white/10 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-white/10">
-        <h3 class="text-sm font-bold uppercase tracking-wider font-mono text-cyan-400 flex items-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="glass-panel rounded-2xl max-w-md w-full p-6 border border-pink-500/20 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-pink-500/10">
+        <h3 class="text-sm font-bold uppercase tracking-wider font-mono text-pink-300 flex items-center gap-2">
+          <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
           </svg>
           Gemini API Key Configuration
@@ -686,7 +700,7 @@
       </div>
 
       <p class="text-xs text-slate-300 leading-relaxed">
-        Deep Search uses Gemini with live Google Search grounding. You can save your Gemini API Key in the server <code class="bg-slate-800 px-1 py-0.5 rounded text-cyan-300 font-mono">.env</code> file, or paste it here to run live searches directly:
+        Deep Search uses Gemini with live Google Search grounding. You can save your Gemini API Key in the server <code class="bg-slate-800 px-1 py-0.5 rounded text-pink-300 font-mono">.env</code> file, or paste it here to run live searches directly:
       </p>
 
       <div class="space-y-2">
@@ -695,7 +709,7 @@
           type="password"
           id="customApiKeyInput"
           placeholder="AIzaSy..."
-          class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-cyan-500"
+          class="w-full bg-slate-900 border border-pink-500/30 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:ring-1 focus:ring-pink-400"
         />
       </div>
 
@@ -703,7 +717,7 @@
         <button id="btnClearCustomKey" class="text-xs text-rose-400 hover:underline">Remove Key</button>
         <div class="flex items-center gap-2">
           <button id="btnCancelKeyModal" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
-          <button id="btnSaveCustomKey" class="px-4 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 font-bold text-xs text-black">Save Key</button>
+          <button id="btnSaveCustomKey" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-300 hover:to-rose-300 font-bold text-xs text-slate-950">Save Key</button>
         </div>
       </div>
     </div>
@@ -887,10 +901,10 @@
       const key = localStorage.getItem('scamshield_gemini_key');
       if (key) {
         keyStatusText.textContent = 'Custom Key Set';
-        keyStatusText.classList.add('text-cyan-400');
+        keyStatusText.classList.add('text-pink-400');
       } else {
         keyStatusText.textContent = 'API Key';
-        keyStatusText.classList.remove('text-cyan-400');
+        keyStatusText.classList.remove('text-pink-400');
       }
     }
     updateKeyStatus();
@@ -1029,11 +1043,11 @@
       } else {
         data.urls_found.forEach(url => {
           const item = document.createElement('div');
-          item.className = 'flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-white/10 hover:border-cyan-500/40 transition';
+          item.className = 'flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-pink-500/10 hover:border-pink-400/50 transition';
           item.innerHTML = `
             <div class="flex items-center gap-2 overflow-hidden">
-              <span class="w-2 h-2 rounded-full ${url.startsWith('http://') ? 'bg-amber-400' : 'bg-cyan-400'} shrink-0"></span>
-              <span class="font-mono text-cyan-300 truncate select-all">${url}</span>
+              <span class="w-2 h-2 rounded-full ${url.startsWith('http://') ? 'bg-amber-400' : 'bg-pink-400'} shrink-0"></span>
+              <span class="font-mono text-pink-300 truncate select-all">${url}</span>
             </div>
             <button class="text-slate-400 hover:text-white shrink-0 ml-2 text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-slate-800" onclick="navigator.clipboard.writeText('${url}'); showToast('URL copied', '📋');">Copy</button>
           `;
@@ -1063,21 +1077,21 @@
       if (data.verdict === 'HIGH-RISK SCAM') {
         aiGirlCard.className = 'mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-rose-950/60 via-slate-900 to-slate-950 border border-rose-500/50 shadow-xl relative overflow-hidden transition-all duration-300';
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-rose-500/25 blur-2xl pointer-events-none';
-        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-rose-500 via-emerald-500 to-indigo-600 p-1 shadow-xl shadow-rose-500/30';
+        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-rose-500 via-pink-500 to-indigo-600 p-1 shadow-xl shadow-rose-500/30';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-rose-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
         aiGirlSpeech.innerHTML = `"🚨 <strong class='text-rose-400 font-bold'>Security Alert! This is a dangerous cyber fraud attempt.</strong> Do not click this link, protect your credentials, and report this immediately to Emergency Helpline 100!"`;
         lastSpokenText = "Security Alert! This is a dangerous cyber fraud attempt. Do not click any links, protect your credentials, and report this immediately to Emergency Helpline 100!";
       } else if (data.verdict === 'SUSPICIOUS') {
         aiGirlCard.className = 'mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-slate-950 border border-amber-500/50 shadow-xl relative overflow-hidden transition-all duration-300';
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-amber-500/20 blur-2xl pointer-events-none';
-        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-600 p-1 shadow-xl shadow-amber-500/20';
+        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-500 via-pink-400 to-rose-600 p-1 shadow-xl shadow-amber-500/20';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-amber-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
         aiGirlSpeech.innerHTML = `"⚠️ <strong class='text-amber-400 font-bold'>Caution! Threat models detected suspicious anomalies.</strong> Exercise extreme caution and verify before proceeding."`;
         lastSpokenText = "Caution! Threat models detected suspicious anomalies. Exercise extreme caution and verify before proceeding.";
       } else {
         aiGirlCard.className = 'mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-950 border border-emerald-500/50 shadow-xl relative overflow-hidden transition-all duration-300';
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-emerald-500/20 blur-2xl pointer-events-none';
-        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-emerald-400 via-cyan-500 to-indigo-600 p-1 shadow-xl shadow-emerald-500/20';
+        if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-emerald-400 via-pink-300 to-pink-500 p-1 shadow-xl shadow-emerald-500/20';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-emerald-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
         aiGirlSpeech.innerHTML = `"🛡️ <strong class='text-emerald-400 font-bold'>All systems clear! This message looks legitimate.</strong> But remember, never disclose your secret OTP or credentials to anyone."`;
         lastSpokenText = "All systems clear! This message looks legitimate. But remember, never disclose your secret OTP or credentials to anyone.";
@@ -1235,20 +1249,20 @@
           card.href = c.url;
           card.target = '_blank';
           card.rel = 'noopener noreferrer';
-          card.className = 'p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-cyan-500/20 hover:border-cyan-400/50 transition flex flex-col justify-between group';
+          card.className = 'p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-pink-500/20 hover:border-pink-400/50 transition flex flex-col justify-between group';
           card.innerHTML = `
             <div>
-              <div class="flex items-center gap-1.5 text-[10px] font-mono text-cyan-400 mb-1">
+              <div class="flex items-center gap-1.5 text-[10px] font-mono text-pink-400 mb-1">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
                 <span class="truncate">${hostname}</span>
               </div>
-              <h4 class="text-xs font-semibold text-white group-hover:text-cyan-300 transition line-clamp-2">${c.title || hostname}</h4>
+              <h4 class="text-xs font-semibold text-white group-hover:text-pink-300 transition line-clamp-2">${c.title || hostname}</h4>
             </div>
-            <div class="mt-2 text-[10px] text-slate-500 font-mono flex items-center justify-between">
+            <div class="mt-2 text-[10px] text-pink-300/60 font-mono flex items-center justify-between">
               <span>Verified Search Grounding</span>
-              <svg class="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3.5 h-3.5 text-pink-400 group-hover:translate-x-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </div>
@@ -1291,7 +1305,7 @@
 
       history.forEach((h, idx) => {
         const item = document.createElement('div');
-        item.className = 'flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-white/5 cursor-pointer transition';
+        item.className = 'flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 border border-pink-500/10 cursor-pointer transition';
         
         let badgeColor = 'bg-emerald-950/80 text-emerald-400 border-emerald-800';
         if (h.verdict === 'HIGH-RISK SCAM') badgeColor = 'bg-rose-950/80 text-rose-400 border-rose-800';
@@ -1306,7 +1320,7 @@
           </div>
           <div class="flex items-center gap-2 shrink-0 ml-2">
             <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">${h.timestamp || ''}</span>
-            <button class="text-xs text-cyan-400 hover:text-cyan-300 font-mono underline">Reload</button>
+            <button class="text-xs text-pink-400 hover:text-pink-300 font-mono underline">Reload</button>
           </div>
         `;
 
