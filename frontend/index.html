@@ -194,6 +194,22 @@
           </svg>
           <span>Helpline 100</span>
         </a>
+
+        <!-- User Authentication Navbar Controls -->
+        <div id="navAuthContainer" class="flex items-center ml-1">
+          <button id="btnNavAuth" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-xs text-slate-950 shadow-md shadow-pink-500/20 transition active:scale-95" title="Sign Up or Log In">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span id="navAuthBtnText">Sign Up / Log In</span>
+          </button>
+
+          <div id="navUserBadge" class="hidden items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-pink-500/30 text-xs">
+            <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+            <span id="navUserName" class="text-pink-200 font-medium font-sans">User</span>
+            <button id="btnLogout" class="text-[11px] font-mono text-pink-400 hover:text-white underline ml-1" title="Sign Out">Sign Out</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -685,6 +701,191 @@
     </footer>
 
   </main>
+
+  <!-- Authentication Modal (Sign Up, Log In, Forgot Password) -->
+  <div id="authModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-panel glass-panel-glow rounded-3xl max-w-md w-full p-6 sm:p-8 border border-pink-500/30 shadow-2xl relative overflow-hidden transition-all duration-300">
+      
+      <!-- Ambient Glow Accents -->
+      <div class="absolute -top-16 -left-16 w-40 h-40 rounded-full bg-pink-500/20 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-40 h-40 rounded-full bg-rose-500/15 blur-3xl pointer-events-none"></div>
+
+      <!-- Close / Dismiss Button -->
+      <button id="btnCloseAuthModal" class="absolute top-5 right-5 text-slate-400 hover:text-pink-300 transition text-xl font-bold p-1 leading-none" title="Close / Continue as Guest">&times;</button>
+
+      <!-- Modal Header Logo & Branding -->
+      <div class="text-center space-y-2 mb-6">
+        <div class="w-12 h-12 mx-auto rounded-2xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-500 flex items-center justify-center shadow-lg shadow-pink-500/30 ring-1 ring-pink-300/40">
+          <svg class="w-7 h-7 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <h2 id="authModalTitle" class="text-2xl font-extrabold tracking-tight text-white">Create an Account</h2>
+        <p id="authModalSubtitle" class="text-xs text-pink-200/70">Join ScamShield to detect fraud, save history & verify unverified links.</p>
+      </div>
+
+      <!-- Tab Buttons: Sign Up | Log In -->
+      <div class="grid grid-cols-2 p-1 mb-5 rounded-xl bg-slate-950/80 border border-pink-500/20 text-xs font-semibold">
+        <button id="tabSignUp" class="py-2 rounded-lg transition text-slate-950 bg-gradient-to-r from-pink-400 to-rose-400 font-bold shadow-md">
+          Sign Up
+        </button>
+        <button id="tabLogIn" class="py-2 rounded-lg transition text-slate-400 hover:text-pink-300 font-medium">
+          Log In
+        </button>
+      </div>
+
+      <!-- Auth Error / Success Alert Box -->
+      <div id="authAlert" class="hidden mb-4 p-3 rounded-xl text-xs font-medium border flex items-center gap-2">
+        <span id="authAlertIcon">⚠️</span>
+        <span id="authAlertMsg">Alert message</span>
+      </div>
+
+      <!-- 1. SIGN UP FORM (Default for new visitors) -->
+      <form id="formSignUp" class="space-y-3.5">
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Full Name</label>
+          <input
+            type="text"
+            id="signUpName"
+            required
+            placeholder="Nikhil Sharma"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-sans text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Email Address</label>
+          <input
+            type="email"
+            id="signUpEmail"
+            required
+            placeholder="nikhil@example.com"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-sans text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Password</label>
+          <input
+            type="password"
+            id="signUpPassword"
+            required
+            minlength="6"
+            placeholder="Create password (min 6 characters)"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Confirm Password</label>
+          <input
+            type="password"
+            id="signUpConfirmPassword"
+            required
+            placeholder="Re-enter password"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-slate-950 text-sm shadow-lg shadow-pink-500/25 transition active:scale-[0.98] mt-1"
+        >
+          Create My Account
+        </button>
+        <p class="text-center text-xs text-slate-400 pt-1">
+          Already have an account? <a href="#" id="linkSwitchToLogIn" class="text-pink-300 hover:underline font-bold">Log In</a>
+        </p>
+      </form>
+
+      <!-- 2. LOG IN FORM -->
+      <form id="formLogIn" class="space-y-3.5 hidden">
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Email Address</label>
+          <input
+            type="email"
+            id="logInEmail"
+            required
+            placeholder="nikhil@example.com"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-sans text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block">Password</label>
+            <a href="#" id="linkForgotPassword" class="text-[11px] text-pink-300 hover:underline font-mono">Forgot Password?</a>
+          </div>
+          <input
+            type="password"
+            id="logInPassword"
+            required
+            placeholder="Enter your password"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-slate-950 text-sm shadow-lg shadow-pink-500/25 transition active:scale-[0.98] mt-1"
+        >
+          Sign In
+        </button>
+        <p class="text-center text-xs text-slate-400 pt-1">
+          Don't have an account yet? <a href="#" id="linkSwitchToSignUp" class="text-pink-300 hover:underline font-bold">Sign Up</a>
+        </p>
+      </form>
+
+      <!-- 3. FORGOT PASSWORD FORM -->
+      <form id="formForgotPassword" class="space-y-3.5 hidden">
+        <div class="p-3 rounded-xl bg-pink-950/40 border border-pink-500/20 text-xs text-pink-200 leading-relaxed">
+          Enter your registered email address and new password below to reset your password.
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Registered Email Address</label>
+          <input
+            type="email"
+            id="forgotEmail"
+            required
+            placeholder="nikhil@example.com"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-sans text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">New Password</label>
+          <input
+            type="password"
+            id="forgotNewPassword"
+            required
+            minlength="6"
+            placeholder="Enter new password (min 6 chars)"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <div>
+          <label class="text-[11px] font-mono uppercase tracking-wider text-slate-400 block mb-1">Confirm New Password</label>
+          <input
+            type="password"
+            id="forgotConfirmPassword"
+            required
+            placeholder="Confirm new password"
+            class="w-full bg-slate-900/90 border border-pink-500/25 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-pink-400/50 focus:border-pink-400"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-slate-950 text-sm shadow-lg shadow-pink-500/25 transition active:scale-[0.98] mt-1"
+        >
+          Reset & Save Password
+        </button>
+        <p class="text-center text-xs text-slate-400 pt-1">
+          Remember your password? <a href="#" id="linkBackToLogIn" class="text-pink-300 hover:underline font-bold">Back to Log In</a>
+        </p>
+      </form>
+
+      <!-- Guest Access / Dismiss -->
+      <div class="mt-4 pt-3 border-t border-pink-500/10 text-center">
+        <button id="btnContinueGuest" class="text-[11px] font-mono text-slate-400 hover:text-pink-300 transition">
+          Continue as Guest &rarr;
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- API Key Modal -->
   <div id="keyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
@@ -1355,6 +1556,251 @@
       toastTimeout = setTimeout(() => {
         toast.classList.add('translate-y-20', 'opacity-0');
       }, 3500);
+    }
+
+    // ==========================================
+    // USER AUTHENTICATION SYSTEM (Sign Up, Log In, Forgot Password)
+    // ==========================================
+    const authModal = document.getElementById('authModal');
+    const btnNavAuth = document.getElementById('btnNavAuth');
+    const navUserBadge = document.getElementById('navUserBadge');
+    const navUserName = document.getElementById('navUserName');
+    const btnLogout = document.getElementById('btnLogout');
+    const btnCloseAuthModal = document.getElementById('btnCloseAuthModal');
+    const btnContinueGuest = document.getElementById('btnContinueGuest');
+
+    // Tabs & Forms
+    const tabSignUp = document.getElementById('tabSignUp');
+    const tabLogIn = document.getElementById('tabLogIn');
+    const formSignUp = document.getElementById('formSignUp');
+    const formLogIn = document.getElementById('formLogIn');
+    const formForgotPassword = document.getElementById('formForgotPassword');
+    const authModalTitle = document.getElementById('authModalTitle');
+    const authModalSubtitle = document.getElementById('authModalSubtitle');
+    const authAlert = document.getElementById('authAlert');
+    const authAlertMsg = document.getElementById('authAlertMsg');
+    const authAlertIcon = document.getElementById('authAlertIcon');
+
+    // Links between forms
+    const linkSwitchToLogIn = document.getElementById('linkSwitchToLogIn');
+    const linkSwitchToSignUp = document.getElementById('linkSwitchToSignUp');
+    const linkForgotPassword = document.getElementById('linkForgotPassword');
+    const linkBackToLogIn = document.getElementById('linkBackToLogIn');
+
+    function getUsers() {
+      try {
+        return JSON.parse(localStorage.getItem('scamshield_users') || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem('scamshield_users', JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      try {
+        return JSON.parse(localStorage.getItem('scamshield_current_user') || 'null');
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setCurrentUser(user) {
+      if (user) {
+        localStorage.setItem('scamshield_current_user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('scamshield_current_user');
+      }
+      renderAuthNavbar();
+    }
+
+    function showAuthAlert(msg, isSuccess = false) {
+      authAlert.classList.remove('hidden', 'bg-rose-950/70', 'border-rose-500/40', 'text-rose-200', 'bg-emerald-950/70', 'border-emerald-500/40', 'text-emerald-200');
+      if (isSuccess) {
+        authAlert.classList.add('bg-emerald-950/70', 'border-emerald-500/40', 'text-emerald-200');
+        authAlertIcon.textContent = '✅';
+      } else {
+        authAlert.classList.add('bg-rose-950/70', 'border-rose-500/40', 'text-rose-200');
+        authAlertIcon.textContent = '⚠️';
+      }
+      authAlertMsg.textContent = msg;
+    }
+
+    function clearAuthAlert() {
+      authAlert.classList.add('hidden');
+    }
+
+    function switchToSignUp() {
+      clearAuthAlert();
+      formSignUp.classList.remove('hidden');
+      formLogIn.classList.add('hidden');
+      formForgotPassword.classList.add('hidden');
+
+      tabSignUp.className = 'py-2 rounded-lg transition text-slate-950 bg-gradient-to-r from-pink-400 to-rose-400 font-bold shadow-md';
+      tabLogIn.className = 'py-2 rounded-lg transition text-slate-400 hover:text-pink-300 font-medium';
+
+      authModalTitle.textContent = 'Create an Account';
+      authModalSubtitle.textContent = 'Join ScamShield to detect fraud, save history & verify unverified links.';
+    }
+
+    function switchToLogIn(prefillEmail = '') {
+      clearAuthAlert();
+      formSignUp.classList.add('hidden');
+      formLogIn.classList.remove('hidden');
+      formForgotPassword.classList.add('hidden');
+
+      tabSignUp.className = 'py-2 rounded-lg transition text-slate-400 hover:text-pink-300 font-medium';
+      tabLogIn.className = 'py-2 rounded-lg transition text-slate-950 bg-gradient-to-r from-pink-400 to-rose-400 font-bold shadow-md';
+
+      authModalTitle.textContent = 'Welcome Back';
+      authModalSubtitle.textContent = 'Log in to access your scam detection dashboard and history.';
+      if (prefillEmail) {
+        document.getElementById('logInEmail').value = prefillEmail;
+        document.getElementById('logInPassword').focus();
+      }
+    }
+
+    function switchToForgotPassword() {
+      clearAuthAlert();
+      formSignUp.classList.add('hidden');
+      formLogIn.classList.add('hidden');
+      formForgotPassword.classList.remove('hidden');
+
+      tabSignUp.className = 'py-2 rounded-lg transition text-slate-400 hover:text-pink-300 font-medium';
+      tabLogIn.className = 'py-2 rounded-lg transition text-slate-400 hover:text-pink-300 font-medium';
+
+      authModalTitle.textContent = 'Reset Password';
+      authModalSubtitle.textContent = 'Set a new password for your registered email address.';
+    }
+
+    function openAuthModal(mode = 'signup') {
+      authModal.classList.remove('hidden');
+      authModal.classList.add('flex');
+      if (mode === 'login') switchToLogIn();
+      else if (mode === 'forgot') switchToForgotPassword();
+      else switchToSignUp();
+    }
+
+    function closeAuthModal() {
+      authModal.classList.add('hidden');
+      authModal.classList.remove('flex');
+    }
+
+    function renderAuthNavbar() {
+      const user = getCurrentUser();
+      if (user && user.name) {
+        btnNavAuth.classList.add('hidden');
+        navUserBadge.classList.remove('hidden');
+        navUserBadge.classList.add('flex');
+        navUserName.textContent = user.name;
+      } else {
+        btnNavAuth.classList.remove('hidden');
+        navUserBadge.classList.add('hidden');
+        navUserBadge.classList.remove('flex');
+      }
+    }
+
+    tabSignUp.addEventListener('click', (e) => { e.preventDefault(); switchToSignUp(); });
+    tabLogIn.addEventListener('click', (e) => { e.preventDefault(); switchToLogIn(); });
+    linkSwitchToLogIn.addEventListener('click', (e) => { e.preventDefault(); switchToLogIn(); });
+    linkSwitchToSignUp.addEventListener('click', (e) => { e.preventDefault(); switchToSignUp(); });
+    linkForgotPassword.addEventListener('click', (e) => { e.preventDefault(); switchToForgotPassword(); });
+    linkBackToLogIn.addEventListener('click', (e) => { e.preventDefault(); switchToLogIn(); });
+
+    btnNavAuth.addEventListener('click', () => openAuthModal('signup'));
+    btnCloseAuthModal.addEventListener('click', closeAuthModal);
+    btnContinueGuest.addEventListener('click', () => {
+      closeAuthModal();
+      showToast('Continuing as Guest.', '👋');
+    });
+
+    btnLogout.addEventListener('click', () => {
+      setCurrentUser(null);
+      showToast('Signed out successfully.', '🚪');
+      openAuthModal('signup');
+    });
+
+    // Form Submissions
+    formSignUp.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signUpName').value.trim();
+      const email = document.getElementById('signUpEmail').value.trim().toLowerCase();
+      const pwd = document.getElementById('signUpPassword').value;
+      const confirmPwd = document.getElementById('signUpConfirmPassword').value;
+
+      if (pwd !== confirmPwd) {
+        showAuthAlert('Passwords do not match! Please verify your password.');
+        return;
+      }
+
+      const users = getUsers();
+      if (users.some(u => u.email === email)) {
+        showAuthAlert('An account with this email already exists. Please log in.');
+        return;
+      }
+
+      users.push({ name, email, password: pwd });
+      saveUsers(users);
+
+      switchToLogIn(email);
+      showAuthAlert('Account created successfully! Please sign in with your password.', true);
+      showToast(`Account created for ${name}! Please sign in.`, '🎉');
+      formSignUp.reset();
+    });
+
+    formLogIn.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('logInEmail').value.trim().toLowerCase();
+      const pwd = document.getElementById('logInPassword').value;
+
+      const users = getUsers();
+      const matched = users.find(u => u.email === email && u.password === pwd);
+
+      if (matched) {
+        setCurrentUser(matched);
+        closeAuthModal();
+        showToast(`Welcome back, ${matched.name}!`, '👋');
+        formLogIn.reset();
+      } else {
+        showAuthAlert('Invalid email or password. Please try again or use Forgot Password.');
+      }
+    });
+
+    formForgotPassword.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('forgotEmail').value.trim().toLowerCase();
+      const newPwd = document.getElementById('forgotNewPassword').value;
+      const confirmNewPwd = document.getElementById('forgotConfirmPassword').value;
+
+      if (newPwd !== confirmNewPwd) {
+        showAuthAlert('New passwords do not match!');
+        return;
+      }
+
+      const users = getUsers();
+      const userIndex = users.findIndex(u => u.email === email);
+
+      if (userIndex === -1) {
+        showAuthAlert('No registered account found with this email. Please sign up first.');
+        return;
+      }
+
+      users[userIndex].password = newPwd;
+      saveUsers(users);
+
+      switchToLogIn(email);
+      showAuthAlert('Password reset successfully! Please sign in with your new password.', true);
+      showToast('Password updated successfully! Please log in.', '🔑');
+      formForgotPassword.reset();
+    });
+
+    // Check user on load: If not logged in, prompt with Sign Up immediately
+    renderAuthNavbar();
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      openAuthModal('signup');
     }
 
     // Initialize History on Load
