@@ -437,12 +437,12 @@
                 <button
                   id="btnSpeakAgain"
                   class="px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-xs text-sky-300 hover:text-white border border-sky-500/30 hover:border-sky-400 flex items-center gap-1.5 transition active:scale-95 shadow-sm font-medium"
-                  title="Listen to Doraemon speak this alert"
+                  title="Listen to AI Female Voice Alert"
                 >
                   <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
-                  <span>🔊 Doraemon se suno (Play Voice)</span>
+                  <span>🔊 Listen to Voice (English)</span>
                 </button>
               </div>
             </div>
@@ -450,7 +450,7 @@
             <!-- Speech Bubble -->
             <div id="aiGirlBubble" class="p-3.5 rounded-xl bg-slate-950/80 border border-rose-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner">
               <span id="aiGirlSpeech" class="font-medium text-rose-200">
-                "🚨 Yes! Yeh fraud message hai, aap sambhal ke rehna! Is link par bilkul click mat karna, varna gadbad ho jayegi!"
+                "🚨 Warning! This is a high-risk fraud message. Please be careful and do not click on any links!"
               </span>
             </div>
           </div>
@@ -788,7 +788,7 @@
       btnSpeakAgain.addEventListener('click', () => {
         if (lastSpokenText) {
           speakAiGirl(lastSpokenText);
-          showToast('🔊 Doraemon bol raha hai...', '🤖');
+          showToast('🔊 AI Assistant is speaking...', '🎙️');
         }
       });
     }
@@ -1049,7 +1049,7 @@
       gaugeIndicator.style.strokeDashoffset = offset;
     }
 
-    // AI Companion Logic (Doraemon)
+    // AI Companion Logic (English Female Voice)
     function updateAiGirlMessage(data) {
       const aiGirlCard = document.getElementById('aiGirlCard');
       const aiGirlGlow = document.getElementById('aiGirlGlow');
@@ -1065,25 +1065,25 @@
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-rose-500/25 blur-2xl pointer-events-none';
         if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-rose-500 via-sky-500 to-indigo-600 p-1 shadow-xl shadow-rose-500/30';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-rose-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
-        aiGirlSpeech.innerHTML = `"🚨 <strong class='text-rose-400 font-bold'>Yes! Yeh fraud message hai, aap sambhal ke rehna!</strong> Is link par bilkul click mat karna, varna sab gadbad ho jayegi! Turant Police Helpline 100 par report karo!"`;
-        lastSpokenText = "Yes! Yeh fraud message hai, aap sambhal ke rehna! Is link par bilkul click mat karna!";
+        aiGirlSpeech.innerHTML = `"🚨 <strong class='text-rose-400 font-bold'>Warning! This is a high-risk fraud message.</strong> Please be extremely careful! Do not click on any suspicious links or share sensitive OTP credentials. Report immediately to Helpline 100!"`;
+        lastSpokenText = "Warning! This is a high-risk fraud message. Please be careful! Do not click any links or share your OTP. Report immediately to Helpline 100.";
       } else if (data.verdict === 'SUSPICIOUS') {
         aiGirlCard.className = 'mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-950/40 via-sky-950/20 to-slate-900/70 border border-amber-500/40 shadow-xl relative overflow-hidden transition-all duration-300';
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-amber-500/20 blur-2xl pointer-events-none';
         if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-amber-500 via-sky-500 to-blue-600 p-1 shadow-xl shadow-amber-500/20';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-amber-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
-        aiGirlSpeech.innerHTML = `"⚠️ <strong class='text-amber-400 font-bold'>Arrey dhyan do! Yeh message suspicious lag raha hai.</strong> Aap sambhal ke rehna aur verify hone tak kisi link ko open mat karna!"`;
-        lastSpokenText = "Arrey dhyan do! Yeh message suspicious lag raha hai, aap sambhal ke rehna aur link mat kholna.";
+        aiGirlSpeech.innerHTML = `"⚠️ <strong class='text-amber-400 font-bold'>Caution! This message contains suspicious patterns.</strong> Please stay alert and do not open any links until fully verified."`;
+        lastSpokenText = "Caution! This message contains suspicious patterns. Please stay alert and do not open any unverified links.";
       } else {
         aiGirlCard.className = 'mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-sky-950/20 to-slate-900/70 border border-emerald-500/40 shadow-xl relative overflow-hidden transition-all duration-300';
         if (aiGirlGlow) aiGirlGlow.className = 'absolute -top-12 -left-12 w-32 h-32 rounded-full bg-emerald-500/20 blur-2xl pointer-events-none';
         if (aiGirlAvatarRing) aiGirlAvatarRing.className = 'w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-tr from-emerald-400 via-sky-500 to-cyan-500 p-1 shadow-xl shadow-emerald-500/20';
         if (aiGirlBubble) aiGirlBubble.className = 'p-3.5 rounded-xl bg-slate-950/90 border border-emerald-500/40 relative text-xs sm:text-sm text-slate-100 font-sans leading-relaxed shadow-inner';
-        aiGirlSpeech.innerHTML = `"🛡️ <strong class='text-emerald-400 font-bold'>Dekho, yeh message safe lag raha hai!</strong> Lekin apna secret OTP kisi ko mat dena, samjhe na!"`;
-        lastSpokenText = "Dekho, yeh message safe lag raha hai! Lekin apna secret OTP kisi ko mat dena, samjhe na!";
+        aiGirlSpeech.innerHTML = `"🛡️ <strong class='text-emerald-400 font-bold'>All clear! This message appears to be safe and legitimate.</strong> However, always remember to never share your secret OTP with anyone."`;
+        lastSpokenText = "All clear! This message appears to be safe and legitimate. However, remember to never share your secret OTP with anyone.";
       }
 
-      // Automatically speak Doraemon's voice
+      // Automatically speak in English female voice
       speakAiGirl(lastSpokenText);
     }
 
@@ -1092,22 +1092,28 @@
       try {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.0;
-        utterance.pitch = 1.35; // Cheerful animated Doraemon tone
+        utterance.rate = 0.95;
+        utterance.pitch = 1.1; // Natural female pitch
 
         const voices = window.speechSynthesis.getVoices();
-        // Priority: Hindi voice -> Indian English voice -> Female/Animated voice
-        const preferredVoice = voices.find(v => 
-          v.lang.startsWith('hi') || 
-          v.lang.includes('IN') || 
-          v.name.toLowerCase().includes('india') ||
-          v.name.toLowerCase().includes('swara') ||
-          v.name.toLowerCase().includes('kalpana') ||
-          v.name.toLowerCase().includes('zira') ||
-          v.name.toLowerCase().includes('female')
-        );
-        if (preferredVoice) {
-          utterance.voice = preferredVoice;
+        
+        // Priority filter: English Female voices (e.g. Zira, Samantha, Jenny, Victoria, Natural, Female)
+        const femaleEnglishVoice = voices.find(v => 
+          v.lang.startsWith('en') && (
+            v.name.toLowerCase().includes('female') ||
+            v.name.toLowerCase().includes('zira') ||
+            v.name.toLowerCase().includes('samantha') ||
+            v.name.toLowerCase().includes('jenny') ||
+            v.name.toLowerCase().includes('aria') ||
+            v.name.toLowerCase().includes('victoria') ||
+            v.name.toLowerCase().includes('karen') ||
+            v.name.toLowerCase().includes('eva') ||
+            v.name.toLowerCase().includes('natural')
+          )
+        ) || voices.find(v => v.lang.startsWith('en'));
+
+        if (femaleEnglishVoice) {
+          utterance.voice = femaleEnglishVoice;
         }
 
         const wave = document.getElementById('aiGirlVoiceWave');
