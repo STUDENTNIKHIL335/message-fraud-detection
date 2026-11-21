@@ -9,14 +9,21 @@ if str(ROOT_DIR) not in sys.path:
 from backend.main import app
 
 @app.middleware("http")
-async def inspect_every_request(request, call_next):
-    if "debug" in request.url.path or request.query_params.get("debug") == "1":
+async def handle_vercel_path(request, call_next):
+    target_path = None
+    matched_path = request.headers.get("x-matched-path")
+    if matched_path:
+        target_path = matched_path.split("?")[0]
+    elif "__path" in request.query_params:
+        target_path = request.query_params["__path"]
+
+    if target_path and target_path != request.scope.get("path"):
+        request.scope["path"] = target_path
+
+    if "debug" in request.query_params or request.scope.get("path") in ["/api/debug", "/debug"]:
         return JSONResponse({
-            "url": str(request.url),
-            "url_path": request.url.path,
-            "scope_path": request.scope.get("path"),
-            "scope_root_path": request.scope.get("root_path"),
-            "scope_raw_path": request.scope.get("raw_path", b"").decode(errors="ignore"),
-            "registered_routes": [getattr(r, "path", None) for r in app.routes if hasattr(r, "path")]
+            "resolved_scope_path": request.scope.get("path"),
+            "x_matched_path": request.headers.get("x-matched-path"),
+            "param_path": request.query_params.get("__path")
         })
     return await call_next(request)
