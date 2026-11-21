@@ -621,6 +621,165 @@ Provide practical, urgent guidance for the user:
     )
 
 
+# Models for AI Guide Agent
+class GuideRequest(BaseModel):
+    query: str
+    api_key: Optional[str] = None
+
+class GuideResponse(BaseModel):
+    reply: str
+    suggestions: List[str] = Field(default_factory=list)
+
+SITE_GUIDE_KNOWLEDGE = {
+    "about": (
+        "🛡️ **Welcome to ScamShield!**\n\n"
+        "ScamShield is an advanced two-tier cybersecurity platform designed to protect users from deceptive SMS, WhatsApp fraud alerts, and phishing links. It pairs sub-15ms local machine learning inference with live Google Search grounded investigations."
+    ),
+    "tier1": (
+        "⚡ **Tier 1: Instant Local ML Scan (<15ms)**\n\n"
+        "• **Zero Latency:** Evaluates text locally on the server in milliseconds without requiring third-party API keys.\n"
+        "• **Machine Learning Model:** Uses an n-gram TF-IDF vectorizer + Logistic Regression classifier trained on real Indian and international cyber fraud datasets.\n"
+        "• **Heuristic Threat Detection:** Scans for URL shorteners (bit.ly, tinyurl), insecure HTTP protocols, suspicious TLDs (.xyz, .top, .click), threat language ('account suspended'), and bank impersonation.\n"
+        "• **Calibrated Score:** Generates a calibrated risk score from 0 (Safe) to 100 (Critical Scam)."
+    ),
+    "tier2": (
+        "🌐 **Tier 2: Gemini Deep Search (Live Web Grounding)**\n\n"
+        "• **Real-Time Web Investigation:** Leverages Google Gemini (`gemini-4-hydrogen` / Grounded Forensic Engine) with Google Search grounding.\n"
+        "• **Domain Whitelist Comparison:** Verifies claimed domains against official government and banking portals (e.g., onlinesbi.sbi, hdfcbank.com, indiapost.gov.in).\n"
+        "• **4-Part Forensic Breakdown:** Delivers Verdict & Risk Score, Forensic Breakdown, Official Domain Comparison, and Certified Action Protocol with live clickable source cards."
+    ),
+    "advisor": (
+        "🎙️ **Jensen Huang • Chief Cyber Defense Advisor**\n\n"
+        "• Your interactive cyber companion located right below the circular risk gauge.\n"
+        "• Delivers executive safety advisories based on scan severity.\n"
+        "• Includes an **AI Male Voice Alert Engine** via the browser's Web Speech API that reads alerts aloud in an authoritative cadence."
+    ),
+    "auth": (
+        "🔐 **User Accounts & Session Management**\n\n"
+        "• **Sign Up:** First-time visitors can register an account in seconds.\n"
+        "• **Log In:** Quick sign-in with email and password to preserve your recent scan history.\n"
+        "• **Forgot Password:** Instant self-service password recovery by email.\n"
+        "• **Guest Access:** You can also click 'Continue as Guest' anytime without signing up."
+    ),
+    "helpline": (
+        "🚨 **Action Protocol If You Encounter Fraud**\n\n"
+        "1. **Do NOT Click:** Never click links or enter OTPs/passwords on unverified portals.\n"
+        "2. **Call Helpline 100:** Immediately call the Police Emergency Helpline **100** if money has been deducted or credentials exposed.\n"
+        "3. **Cybercrime Portal:** File a formal cyber complaint at [cybercrime.gov.in](https://cybercrime.gov.in).\n"
+        "4. **Chakshu Portal:** Report suspect mobile numbers and WhatsApp handles at [sancharsaathi.gov.in](https://sancharsaathi.gov.in)."
+    )
+}
+
+@app.post("/api/ai-guide", response_model=GuideResponse)
+async def ai_guide_endpoint(req: GuideRequest):
+    """
+    Interactive AI Agent Guide that explains all details, architecture,
+    features, and cybersecurity best practices of ScamShield.
+    """
+    q = (req.query or "").strip().lower()
+    if not q:
+        return GuideResponse(
+            reply=SITE_GUIDE_KNOWLEDGE["about"],
+            suggestions=[
+                "Take an interactive website tour",
+                "How does Tier 1 Basic Search work?",
+                "How does Tier 2 Deep Search work?",
+                "Tell me about Jensen Huang advisor",
+                "What should I do if I am scammed?"
+            ]
+        )
+
+    # Check for direct Gemini processing if key available
+    gemini_key = req.api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    if gemini_key and "your_actual_key" not in gemini_key and len(gemini_key) > 20 and len(q) > 8:
+        try:
+            from google import genai
+            from google.genai import types
+            client = genai.Client(api_key=gemini_key)
+            prompt = f"""You are the official ScamShield AI Cyber Agent Guide.
+ScamShield is an AI-powered message and link threat detector.
+Features:
+- Two-tier detection: Tier 1 is a fast local ML scan (<15ms, TF-IDF + Logistic Regression, regex heuristics), Tier 2 is Gemini Deep Search with live Google Search Grounding.
+- Chief Cyber Defense Advisor: Jensen Huang with an English Male Voice alert engine.
+- Helpline: Police Emergency Helpline 100, cybercrime.gov.in, Chakshu.
+- Theme: Cyber Baby Pink aesthetic with dark mode glassmorphism.
+- User Auth: Sign Up, Log In, and Forgot Password recovery.
+
+User question: "{req.query}"
+Provide a clear, engaging, beautifully structured answer with bullet points and cybersecurity advice where relevant. Keep it concise (under 180 words)."""
+
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=prompt
+            )
+            if response and response.text:
+                return GuideResponse(
+                    reply=response.text,
+                    suggestions=[
+                        "How does Tier 1 Instant ML work?",
+                        "How does Tier 2 Gemini work?",
+                        "What is Helpline 100?",
+                        "Take an interactive website tour"
+                    ]
+                )
+        except Exception as g_err:
+            logger.info(f"Gemini guide lookup bypassed: {g_err}")
+
+    # Intelligent Knowledge Matching
+    if any(k in q for k in ["tier 1", "tier1", "basic scan", "basic search", "local ml", "machine learning"]):
+        reply = SITE_GUIDE_KNOWLEDGE["tier1"]
+    elif any(k in q for k in ["tier 2", "tier2", "deep scan", "deep search", "gemini", "grounding", "citations"]):
+        reply = SITE_GUIDE_KNOWLEDGE["tier2"]
+    elif any(k in q for k in ["jensen", "voice", "advisor", "male", "avatar", "huang", "audio"]):
+        reply = SITE_GUIDE_KNOWLEDGE["advisor"]
+    elif any(k in q for k in ["auth", "sign up", "login", "log in", "password", "forgot", "account"]):
+        reply = SITE_GUIDE_KNOWLEDGE["auth"]
+    elif any(k in q for k in ["police", "100", "fir", "report", "scammed", "victim"]):
+        reply = SITE_GUIDE_KNOWLEDGE["helpline"]
+    elif any(k in q for k in ["bank", "kyc", "sbi", "hdfc", "yono"]):
+        reply = (
+            "🏦 **Bank KYC Fraud Protection**\n\n"
+            "• **The Threat:** Attackers send fake SMS alerts claiming your bank account or YONO access will be suspended within 24 hours unless you click an unverified link.\n"
+            "• **How ScamShield Detects It:** Identifies phishing domains (e.g., `sbi-kyc-verify.xyz` vs official `onlinesbi.sbi`), flags threat keywords, and alerts you before credentials are breached.\n"
+            "• **Remember:** Genuine banks NEVER send links asking for PAN updates, debit card PINs, or secret OTPs."
+        )
+    elif any(k in q for k in ["courier", "parcel", "india post", "delivery"]):
+        reply = (
+            "📦 **Courier & Delivery Phishing Alerts**\n\n"
+            "• **The Threat:** Fake messages from 'India Post' or courier services claiming your parcel address is missing and demanding an update within 12 hours.\n"
+            "• **How ScamShield Detects It:** Flags suspicious non-government domains (`.top`, `.club`) and alerts you to official tracking channels (`indiapost.gov.in`)."
+        )
+    elif any(k in q for k in ["tour", "guide", "walkthrough", "overview", "what is", "about"]):
+        reply = SITE_GUIDE_KNOWLEDGE["about"] + "\n\n" + (
+            "Here is a quick overview of what you can do on this site:\n"
+            "1. **Paste any message** or test one of the 4 demo scenarios.\n"
+            "2. **Run Basic Search** for an instant local ML threat score.\n"
+            "3. **Listen to Jensen Huang** deliver spoken voice warnings.\n"
+            "4. **Run Deep Search** to verify official bank domains against live web data.\n"
+            "5. **Save Recent Scans** automatically in your browser session."
+        )
+    else:
+        reply = (
+            f"🤖 **ScamShield Cyber Agent Guide**\n\n"
+            f"You asked: *\"{req.query}\"*\n\n"
+            f"ScamShield is equipped with two detection tiers:\n"
+            f"• **Tier 1 (Basic Search):** Evaluates messages locally in <15ms using an ML classifier + deterministic heuristics.\n"
+            f"• **Tier 2 (Deep Search):** Uses Gemini with Google Search grounding to verify official banking and government registries.\n"
+            f"• **Advisor:** Jensen Huang delivers spoken voice safety alerts.\n"
+            f"• **Helpline:** If you ever suspect cyber fraud, contact Emergency Helpline **100** immediately."
+        )
+
+    return GuideResponse(
+        reply=reply,
+        suggestions=[
+            "How does Tier 1 Basic Search work?",
+            "How does Tier 2 Deep Search work?",
+            "Explain Jensen Huang's Voice Alerts",
+            "What to do if scammed? (Helpline 100)"
+        ]
+    )
+
+
 # Serve Frontend
 FRONTEND_DIR.mkdir(parents=True, exist_ok=True)
 
