@@ -145,6 +145,102 @@
     .pulse-effect {
       animation: pulse-glow 3s infinite ease-in-out;
     }
+
+    /* Light Theme (Bright White Mode) */
+    html.light body {
+      background-color: #fcf8fa;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(244, 114, 182, 0.20) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(251, 207, 232, 0.35) 0px, transparent 55%),
+        radial-gradient(at 50% 100%, rgba(244, 114, 182, 0.14) 0px, transparent 60%);
+      color: #0f172a;
+    }
+    html.light .glass-panel {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      box-shadow: 0 10px 30px -5px rgba(244, 114, 182, 0.15);
+    }
+    html.light .glass-panel-glow {
+      box-shadow: 0 10px 35px -5px rgba(244, 114, 182, 0.22);
+    }
+    html.light .cyber-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(244, 114, 182, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(244, 114, 182, 0.08) 1px, transparent 1px);
+    }
+    html.light .text-slate-100,
+    html.light .text-slate-200,
+    html.light .text-white:not(.keep-white) {
+      color: #0f172a;
+    }
+    html.light .text-pink-100\/70 {
+      color: #475569;
+    }
+    html.light .text-slate-400 {
+      color: #64748b;
+    }
+    html.light textarea,
+    html.light input:not([type="checkbox"]):not([type="radio"]) {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: rgba(244, 114, 182, 0.40) !important;
+    }
+    html.light textarea::placeholder,
+    html.light input::placeholder {
+      color: #94a3b8 !important;
+    }
+    html.light .sample-btn,
+    html.light .payment-sample-btn {
+      background-color: rgba(255, 255, 255, 0.90) !important;
+      border-color: rgba(244, 114, 182, 0.30) !important;
+    }
+    html.light .sample-btn:hover,
+    html.light .payment-sample-btn:hover {
+      background-color: #ffffff !important;
+      border-color: rgba(236, 72, 153, 0.6) !important;
+    }
+    html.light .bg-slate-950\/70,
+    html.light .bg-slate-950\/80,
+    html.light .bg-slate-900\/80,
+    html.light .bg-slate-900,
+    html.light .bg-slate-950,
+    html.light .bg-slate-800\/80 {
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #0f172a;
+    }
+    html.light .prose-scam p {
+      color: #334155;
+    }
+    html.light .prose-scam strong {
+      color: #0f172a;
+    }
+    html.light .prose-scam th {
+      background: rgba(252, 231, 243, 0.85);
+      color: #be185d;
+    }
+    html.light .prose-scam td {
+      color: #334155;
+      border-color: rgba(244, 114, 182, 0.2);
+    }
+
+    /* Scanner Laser Animation */
+    @keyframes scan-laser {
+      0% { top: 0%; opacity: 0.8; }
+      50% { top: 96%; opacity: 1; }
+      100% { top: 0%; opacity: 0.8; }
+    }
+    .scanner-laser {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #f472b6, #ec4899, #f472b6, transparent);
+      box-shadow: 0 0 15px 3px rgba(244, 114, 182, 0.8);
+      animation: scan-laser 2.2s infinite ease-in-out;
+    }
   </style>
 </head>
 <body class="min-h-screen text-slate-100 font-sans cyber-grid selection:bg-pink-300 selection:text-pink-950">
@@ -195,6 +291,12 @@
           <span>Helpline 100</span>
         </a>
 
+        <!-- Brightness / Theme Mode Toggle (Dark & White) -->
+        <button id="btnThemeToggle" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-xs text-pink-300 border border-pink-500/30 hover:border-pink-400 transition cursor-pointer" title="Toggle Brightness / Dark & White Mode">
+          <span id="themeToggleIcon" class="text-sm">☀️</span>
+          <span id="themeToggleText" class="hidden sm:inline font-mono font-medium">Bright</span>
+        </button>
+
         <!-- User Authentication Navbar Controls -->
         <div id="navAuthContainer" class="flex items-center ml-1">
           <button id="btnNavAuth" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 font-extrabold text-xs text-slate-950 shadow-md shadow-pink-500/20 transition active:scale-95" title="Sign Up or Log In">
@@ -233,6 +335,33 @@
         Paste any SMS, WhatsApp alert, or unverified link. Scan instantly with local ML heuristics, then verify the exact domains and entities against live web data.
       </p>
     </div>
+
+    <!-- Mode Selection Tabs (Text/Link Threat vs GPay/UPI Screenshot Verifier) -->
+    <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+      <button 
+        id="tabScanMessage" 
+        class="mode-nav-btn active px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition shadow-lg bg-gradient-to-r from-pink-500 to-rose-400 text-white shadow-pink-500/25 border border-pink-400/40 cursor-pointer"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+        <span>💬 Message & Phishing Link Detector</span>
+      </button>
+
+      <button 
+        id="tabScanPayment" 
+        class="mode-nav-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-pink-300 border border-pink-500/30 cursor-pointer"
+      >
+        <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>📱 GPay & UPI Screenshot Verifier</span>
+        <span class="px-2 py-0.5 rounded-full text-[10px] bg-pink-500/25 text-pink-300 border border-pink-400/40 font-mono font-bold animate-pulse">NEW • REAL vs FAKE</span>
+      </button>
+    </div>
+
+    <!-- ==================== Text / Link Scanner Section ==================== -->
+    <div id="textScannerSection" class="space-y-8">
 
     <!-- Scanner Input Card -->
     <div class="glass-panel glass-panel-glow rounded-2xl p-5 sm:p-7 shadow-2xl border border-pink-500/20 relative overflow-hidden">
@@ -645,6 +774,183 @@
       </div>
 
     </div>
+    </div> <!-- /#textScannerSection -->
+
+    <!-- ==================== GPay & UPI Payment Screenshot Verifier Section ==================== -->
+    <div id="paymentScannerSection" class="space-y-8 hidden">
+      
+      <!-- Upload & Input Card -->
+      <div class="glass-panel glass-panel-glow rounded-2xl p-5 sm:p-7 shadow-2xl border border-pink-500/20 relative overflow-hidden">
+        
+        <!-- Card Top Bar -->
+        <div class="flex items-center justify-between pb-4 mb-4 border-b border-pink-500/10 text-xs font-mono text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-pink-400 inline-block shadow-sm shadow-pink-400"></span>
+            <span class="w-3 h-3 rounded-full bg-rose-400 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-pink-300 inline-block"></span>
+            <span class="text-pink-300/80 ml-2">transaction-forensics:~/upi-verifier$</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-500/30 text-[10px] font-mono">
+              NPCI 12-Digit & Spoof APK Detection
+            </span>
+          </div>
+        </div>
+
+        <!-- Section Title & Guide -->
+        <div class="mb-5 space-y-1">
+          <h2 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            <span class="text-pink-400">📱</span> Online Transaction Screenshot Verifier
+          </h2>
+          <p class="text-xs sm:text-sm text-pink-100/70">
+            Upload Google Pay (GPay), PhonePe, Paytm, or UPI payment screenshot. Detect fake payment generators (Paytm Spoof, FakePay), malformed UTRs, and altered timestamps before releasing goods or funds.
+          </p>
+        </div>
+
+        <!-- Drag & Drop Upload Zone -->
+        <div 
+          id="paymentDropZone" 
+          class="border-2 border-dashed border-pink-500/30 hover:border-pink-400 rounded-2xl p-6 sm:p-10 text-center cursor-pointer transition bg-slate-950/50 hover:bg-slate-900/60 relative group"
+        >
+          <input type="file" id="paymentFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" class="hidden" />
+          
+          <div id="dropZonePrompt" class="space-y-3">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-pink-500/20 via-pink-400/20 to-rose-400/20 border border-pink-400/40 flex items-center justify-center shadow-lg shadow-pink-500/10 group-hover:scale-105 transition">
+              <svg class="w-8 h-8 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm sm:text-base font-semibold text-slate-100">
+                Drag and drop your transaction screenshot here, or <span class="text-pink-400 underline decoration-pink-400/50 hover:text-pink-300">browse file</span>
+              </p>
+              <p class="text-xs text-slate-400 mt-1 font-mono">
+                Supports PNG, JPG, JPEG, WEBP • Or press <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-pink-500/30 text-pink-300 text-[11px]">Ctrl + V</kbd> to paste screenshot directly
+              </p>
+            </div>
+          </div>
+
+          <!-- Selected Image Preview Container (Hidden initially) -->
+          <div id="imagePreviewContainer" class="hidden flex-col sm:flex-row items-center gap-6 text-left">
+            <div class="relative w-44 h-56 rounded-xl overflow-hidden border-2 border-pink-500/40 bg-slate-900 shadow-xl flex-shrink-0 group">
+              <img id="previewImg" src="" alt="Transaction Screenshot Preview" class="w-full h-full object-cover" />
+              <div id="previewLaser" class="scanner-laser hidden"></div>
+            </div>
+            <div class="space-y-2 flex-grow">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-pink-950/80 text-pink-300 border border-pink-500/40">READY FOR FORENSIC SCAN</span>
+                <span id="previewFileExt" class="text-xs text-slate-400 font-mono">IMAGE LOADED</span>
+              </div>
+              <h3 id="previewFileName" class="text-sm sm:text-base font-bold text-slate-100 truncate max-w-xs sm:max-w-md">payment_screenshot.png</h3>
+              <p id="previewFileSize" class="text-xs text-slate-400 font-mono">Size calculated • Ready for neural forensic analysis</p>
+              <div class="flex items-center gap-3 pt-2">
+                <button id="btnChangeImage" type="button" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-pink-300 border border-pink-500/30 transition cursor-pointer">
+                  Change Image
+                </button>
+                <button id="btnRemoveImage" type="button" class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-xs text-rose-300 border border-rose-500/30 transition cursor-pointer">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- One-Click Test Scenarios (Demo Samples) -->
+        <div class="mt-4 pt-4 border-t border-pink-500/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Try Instant Demo Test Screenshots:
+            </span>
+            <span class="text-[11px] text-pink-300/60 font-mono">1-Click Forensic Tests</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <!-- Sample 1: Fake GPay -->
+            <button 
+              data-payment-sample="fake-gpay"
+              class="payment-sample-btn text-left p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-rose-500/30 hover:border-rose-400 transition group relative cursor-pointer"
+            >
+              <div class="flex items-center justify-between text-xs font-bold text-rose-400 mb-1">
+                <span class="flex items-center gap-1.5">🚨 Fake GPay Alert</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-rose-950/80 border border-rose-800 font-mono">SPOOF</span>
+              </div>
+              <p class="text-[11px] text-slate-400">"₹5,000 to Sharma Enterprises • Malformed 6-digit UTR (984218) & Roboto font"</p>
+            </button>
+
+            <!-- Sample 2: Fake Paytm -->
+            <button 
+              data-payment-sample="fake-paytm"
+              class="payment-sample-btn text-left p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-amber-500/30 hover:border-amber-400 transition group relative cursor-pointer"
+            >
+              <div class="flex items-center justify-between text-xs font-bold text-amber-400 mb-1">
+                <span class="flex items-center gap-1.5">🚨 Fake Paytm Spoof</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-950/80 border border-amber-800 font-mono">SPOOF</span>
+              </div>
+              <p class="text-[11px] text-slate-400">"₹2,499 to Rahul General Store • Alphanumeric reference code & missing seal"</p>
+            </button>
+
+            <!-- Sample 3: Genuine PhonePe -->
+            <button 
+              data-payment-sample="genuine-phonepe"
+              class="payment-sample-btn text-left p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800/90 border border-emerald-500/30 hover:border-emerald-400 transition group relative cursor-pointer"
+            >
+              <div class="flex items-center justify-between text-xs font-bold text-emerald-400 mb-1">
+                <span class="flex items-center gap-1.5">✅ Genuine PhonePe</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded bg-emerald-950/80 border border-emerald-800 font-mono">REAL</span>
+              </div>
+              <p class="text-[11px] text-slate-400">"₹850 to Café Cyber Shield • Valid 12-digit NPCI UTR (432718905612)"</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Scan Action Button -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-xs text-slate-400 font-mono flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></span>
+            <span>Multimodal Vision & NPCI Rule Verifier Engine</span>
+          </div>
+
+          <button 
+            id="btnScanPayment" 
+            class="w-full sm:w-auto px-7 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 hover:from-pink-300 hover:to-rose-400 text-slate-950 shadow-lg shadow-pink-500/30 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span>Analyze Screenshot (Verify Real vs Fake)</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Payment Scan Progress Animation Container (Hidden initially) -->
+      <div id="paymentScanProgress" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-pink-500/30 text-center space-y-4">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-400/40 text-pink-400 animate-pulse">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+          </svg>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-base font-bold text-slate-100">Running AI Forensic Receipt Inspection...</h3>
+          <p id="paymentProgressStatus" class="text-xs sm:text-sm text-pink-300 font-mono">
+            Validating 12-digit NPCI UPI Reference (UTR) format...
+          </p>
+        </div>
+        <div class="w-full max-w-md mx-auto bg-slate-900 rounded-full h-2 overflow-hidden border border-pink-500/30">
+          <div class="bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 h-full w-2/3 animate-pulse"></div>
+        </div>
+      </div>
+
+      <!-- Payment Forensic Results Card (Hidden initially) -->
+      <div id="paymentResultCard" class="hidden glass-panel rounded-2xl p-6 sm:p-8 border border-pink-500/30 shadow-2xl space-y-6">
+        <!-- Rendered results inserted by JS -->
+      </div>
+
+    </div>
+
 
     <!-- Recent Scans History (LocalStorage) -->
     <div class="glass-panel rounded-2xl p-6 border border-pink-500/20 shadow-xl space-y-4">
@@ -2101,6 +2407,461 @@
 
     // Initialize History on Load
     renderHistory();
+
+    // ==========================================
+    // 1. THEME SWITCHER (Dark & White / Brightness Mode)
+    // ==========================================
+    const btnThemeToggle = document.getElementById('btnThemeToggle');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+    const themeToggleText = document.getElementById('themeToggleText');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        if (themeToggleIcon) themeToggleIcon.textContent = '🌙';
+        if (themeToggleText) themeToggleText.textContent = 'Dark';
+        localStorage.setItem('scamshield_theme', 'light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        if (themeToggleIcon) themeToggleIcon.textContent = '☀️';
+        if (themeToggleText) themeToggleText.textContent = 'Bright';
+        localStorage.setItem('scamshield_theme', 'dark');
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('scamshield_theme') || 'dark';
+      applyTheme(savedTheme);
+    }
+
+    if (btnThemeToggle) {
+      btnThemeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+        showToast(`Switched to ${newTheme === 'light' ? 'Bright White' : 'Cyber Dark'} Mode`, newTheme === 'light' ? '☀️' : '🌙');
+      });
+    }
+
+    initTheme();
+
+    // ==========================================
+    // 2. SCANNER MODE TABS (Message vs Payment Screenshot)
+    // ==========================================
+    const tabScanMessage = document.getElementById('tabScanMessage');
+    const tabScanPayment = document.getElementById('tabScanPayment');
+    const textScannerSection = document.getElementById('textScannerSection');
+    const paymentScannerSection = document.getElementById('paymentScannerSection');
+
+    function switchScannerMode(mode) {
+      if (mode === 'payment') {
+        tabScanPayment.className = 'mode-nav-btn active px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition shadow-lg bg-gradient-to-r from-pink-500 to-rose-400 text-white shadow-pink-500/25 border border-pink-400/40 cursor-pointer';
+        tabScanMessage.className = 'mode-nav-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-pink-300 border border-pink-500/30 cursor-pointer';
+        textScannerSection.classList.add('hidden');
+        paymentScannerSection.classList.remove('hidden');
+      } else {
+        tabScanMessage.className = 'mode-nav-btn active px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition shadow-lg bg-gradient-to-r from-pink-500 to-rose-400 text-white shadow-pink-500/25 border border-pink-400/40 cursor-pointer';
+        tabScanPayment.className = 'mode-nav-btn px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-pink-300 border border-pink-500/30 cursor-pointer';
+        paymentScannerSection.classList.add('hidden');
+        textScannerSection.classList.remove('hidden');
+      }
+    }
+
+    if (tabScanMessage && tabScanPayment) {
+      tabScanMessage.addEventListener('click', () => switchScannerMode('message'));
+      tabScanPayment.addEventListener('click', () => switchScannerMode('payment'));
+    }
+
+    // ==========================================
+    // 3. GPAY & UPI SCREENSHOT VERIFIER LOGIC
+    // ==========================================
+    const paymentDropZone = document.getElementById('paymentDropZone');
+    const paymentFileInput = document.getElementById('paymentFileInput');
+    const dropZonePrompt = document.getElementById('dropZonePrompt');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const previewImg = document.getElementById('previewImg');
+    const previewLaser = document.getElementById('previewLaser');
+    const previewFileName = document.getElementById('previewFileName');
+    const previewFileSize = document.getElementById('previewFileSize');
+    const previewFileExt = document.getElementById('previewFileExt');
+    const btnChangeImage = document.getElementById('btnChangeImage');
+    const btnRemoveImage = document.getElementById('btnRemoveImage');
+    const btnScanPayment = document.getElementById('btnScanPayment');
+    const paymentScanProgress = document.getElementById('paymentScanProgress');
+    const paymentProgressStatus = document.getElementById('paymentProgressStatus');
+    const paymentResultCard = document.getElementById('paymentResultCard');
+
+    let selectedPaymentBase64 = null;
+    let selectedPaymentFileName = "";
+    let selectedPaymentSampleId = null;
+
+    // Load file into preview
+    function loadScreenshotFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Please upload a valid image file (PNG, JPG, WEBP)', '⚠️');
+        return;
+      }
+      selectedPaymentFileName = file.name;
+      selectedPaymentSampleId = null;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        selectedPaymentBase64 = e.target.result;
+        previewImg.src = selectedPaymentBase64;
+        previewFileName.textContent = file.name;
+        previewFileSize.textContent = `${(file.size / 1024).toFixed(1)} KB • Image loaded`;
+        previewFileExt.textContent = file.type.replace('image/', '').toUpperCase() + ' RECEIPT';
+
+        dropZonePrompt.classList.add('hidden');
+        imagePreviewContainer.classList.remove('hidden');
+        imagePreviewContainer.classList.add('flex');
+        showToast('Screenshot loaded! Ready to scan.', '📱');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Dropzone Click
+    if (paymentDropZone && paymentFileInput) {
+      paymentDropZone.addEventListener('click', (e) => {
+        if (e.target.closest('#btnChangeImage') || e.target.closest('#btnRemoveImage')) return;
+        paymentFileInput.click();
+      });
+
+      paymentFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          loadScreenshotFile(e.target.files[0]);
+        }
+      });
+
+      // Drag & Drop
+      paymentDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        paymentDropZone.classList.add('border-pink-400', 'bg-slate-900/80');
+      });
+
+      paymentDropZone.addEventListener('dragleave', () => {
+        paymentDropZone.classList.remove('border-pink-400', 'bg-slate-900/80');
+      });
+
+      paymentDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        paymentDropZone.classList.remove('border-pink-400', 'bg-slate-900/80');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          loadScreenshotFile(e.dataTransfer.files[0]);
+        }
+      });
+    }
+
+    // Change & Remove
+    if (btnChangeImage) {
+      btnChangeImage.addEventListener('click', (e) => {
+        e.stopPropagation();
+        paymentFileInput.click();
+      });
+    }
+
+    if (btnRemoveImage) {
+      btnRemoveImage.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectedPaymentBase64 = null;
+        selectedPaymentFileName = "";
+        selectedPaymentSampleId = null;
+        paymentFileInput.value = '';
+        imagePreviewContainer.classList.add('hidden');
+        imagePreviewContainer.classList.remove('flex');
+        dropZonePrompt.classList.remove('hidden');
+        paymentResultCard.classList.add('hidden');
+      });
+    }
+
+    // Global Clipboard Paste (Ctrl+V)
+    window.addEventListener('paste', (e) => {
+      const items = (e.clipboardData || (e.originalEvent && e.originalEvent.clipboardData))?.items || [];
+      for (const item of items) {
+        if (item.type.indexOf('image') !== -1) {
+          const blob = item.getAsFile();
+          switchScannerMode('payment');
+          loadScreenshotFile(blob);
+          showToast('Screenshot pasted from clipboard!', '📋');
+          break;
+        }
+      }
+    });
+
+    // One-Click Demo Sample Buttons
+    const paymentSampleBtns = document.querySelectorAll('[data-payment-sample]');
+    paymentSampleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sampleId = btn.getAttribute('data-payment-sample');
+        selectedPaymentSampleId = sampleId;
+        
+        let sampleName = "GPay_Payment_Spoof.png";
+        let sampleMeta = "₹5,000.00 to Sharma Enterprises";
+        if (sampleId === 'fake-paytm') {
+          sampleName = "Paytm_Spoof_Receipt.png";
+          sampleMeta = "₹2,499.00 to Rahul General Store";
+        } else if (sampleId === 'genuine-phonepe') {
+          sampleName = "PhonePe_Authentic_Receipt.png";
+          sampleMeta = "₹850.00 to Café Cyber Shield";
+        }
+
+        // Generate simulated mobile receipt placeholder preview
+        const svgMock = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+          <rect width="300" height="400" fill="${sampleId === 'genuine-phonepe' ? '#5f259f' : (sampleId === 'fake-paytm' ? '#00b9f5' : '#1a73e8')}"/>
+          <circle cx="150" cy="110" r="45" fill="white" fill-opacity="0.2"/>
+          <text x="150" y="120" font-family="sans-serif" font-size="34" font-weight="bold" fill="white" text-anchor="middle">✓</text>
+          <text x="150" y="190" font-family="sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">${sampleMeta.split(' to ')[0]}</text>
+          <text x="150" y="220" font-family="sans-serif" font-size="14" fill="white" fill-opacity="0.9" text-anchor="middle">Paid to ${sampleMeta.split(' to ')[1] || 'Merchant'}</text>
+          <rect x="25" y="260" width="250" height="110" rx="10" fill="white" fill-opacity="0.15"/>
+          <text x="45" y="295" font-family="monospace" font-size="11" fill="white">UTR / Ref: ${sampleId === 'fake-gpay' ? '984218 (6-digits)' : (sampleId === 'fake-paytm' ? 'PAYTM-REF-99218' : '432718905612')}</text>
+          <text x="45" y="325" font-family="monospace" font-size="11" fill="white">Date: 22 Nov 2026, 08:35 PM</text>
+          <text x="45" y="350" font-family="monospace" font-size="11" fill="white">Status: Payment Successful</text>
+        </svg>`;
+
+        selectedPaymentBase64 = "data:image/svg+xml;base64," + btoa(svgMock);
+        previewImg.src = selectedPaymentBase64;
+        previewFileName.textContent = sampleName;
+        previewFileSize.textContent = `Demo Sample • ${sampleMeta}`;
+        previewFileExt.textContent = 'DEMO RECEIPT';
+
+        dropZonePrompt.classList.add('hidden');
+        imagePreviewContainer.classList.remove('hidden');
+        imagePreviewContainer.classList.add('flex');
+
+        showToast(`Loaded ${sampleName}. Ready to analyze!`, '🔍');
+      });
+    });
+
+    // Scan Execution
+    if (btnScanPayment) {
+      btnScanPayment.addEventListener('click', async () => {
+        if (!selectedPaymentBase64 && !selectedPaymentSampleId) {
+          showToast('Please upload a screenshot or choose a demo sample first!', '⚠️');
+          return;
+        }
+
+        btnScanPayment.disabled = true;
+        btnScanPayment.classList.add('opacity-60', 'cursor-not-allowed');
+        paymentResultCard.classList.add('hidden');
+        paymentScanProgress.classList.remove('hidden');
+        previewLaser.classList.remove('hidden');
+        paymentScanProgress.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Cycle through status messages
+        const progressSteps = [
+          "Reading receipt metadata & payment app identity...",
+          "Validating 12-digit NPCI UPI Reference (UTR) format...",
+          "Analyzing typography & font kerning against official app fonts...",
+          "Detecting spoof APK artifacts & digital splicing halos..."
+        ];
+        let pIdx = 0;
+        const progressInterval = setInterval(() => {
+          pIdx = (pIdx + 1) % progressSteps.length;
+          paymentProgressStatus.textContent = progressSteps[pIdx];
+        }, 600);
+
+        try {
+          const payload = {
+            image_base64: selectedPaymentBase64,
+            sample_id: selectedPaymentSampleId,
+            api_key: (customApiKeyInput ? customApiKeyInput.value.trim() : "")
+          };
+
+          const res = await fetch('/api/scan-transaction-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.detail || `Server returned HTTP ${res.status}`);
+          }
+
+          const data = await res.json();
+          clearInterval(progressInterval);
+          paymentScanProgress.classList.add('hidden');
+          previewLaser.classList.add('hidden');
+          btnScanPayment.disabled = false;
+          btnScanPayment.classList.remove('opacity-60', 'cursor-not-allowed');
+
+          renderPaymentForensicResult(data);
+
+        } catch (err) {
+          clearInterval(progressInterval);
+          paymentScanProgress.classList.add('hidden');
+          previewLaser.classList.add('hidden');
+          btnScanPayment.disabled = false;
+          btnScanPayment.classList.remove('opacity-60', 'cursor-not-allowed');
+          showToast(`Forensic scan failed: ${err.message}`, '❌');
+        }
+      });
+    }
+
+    // Render Payment Forensic Result
+    function renderPaymentForensicResult(data) {
+      const isFake = data.verdict.includes('FAKE') || data.risk_score >= 80;
+      const isGenuine = data.verdict.includes('GENUINE') || data.risk_score < 30;
+
+      let verdictColor = isFake ? 'rose' : (isGenuine ? 'emerald' : 'amber');
+      let verdictIcon = isFake ? '🚨' : (isGenuine ? '✅' : '⚠️');
+
+      // Forensic checks HTML
+      const checksHtml = (data.forensic_checks || []).map(c => {
+        let statusBadge = '';
+        if (c.status === 'PASS') {
+          statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">✓ PASS</span>`;
+        } else if (c.status === 'FAIL') {
+          statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-950/80 text-rose-400 border border-rose-500/40">✗ FAIL</span>`;
+        } else {
+          statusBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950/80 text-amber-400 border border-amber-500/40">! WARNING</span>`;
+        }
+
+        return `
+          <div class="p-3.5 rounded-xl bg-slate-900/70 border border-pink-500/15 space-y-1">
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-200">
+              <span class="flex items-center gap-1.5">🔬 ${c.name}</span>
+              ${statusBadge}
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">${c.details}</p>
+          </div>
+        `;
+      }).join('');
+
+      // Red flags HTML
+      const redFlagsHtml = (data.red_flags || []).map(flag => `
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-mono bg-rose-950/80 text-rose-300 border border-rose-500/40">
+          <span>⚠️</span> ${flag}
+        </span>
+      `).join('');
+
+      paymentResultCard.innerHTML = `
+        <!-- Top Verdict Banner -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-r ${isFake ? 'from-rose-950/90 via-slate-900/90 to-pink-950/90 border-rose-500/40' : (isGenuine ? 'from-emerald-950/90 via-slate-900/90 to-slate-950/90 border-emerald-500/40' : 'from-amber-950/90 via-slate-900/90 to-slate-950/90 border-amber-500/40')} border shadow-2xl relative overflow-hidden">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono font-extrabold tracking-wider uppercase bg-${verdictColor}-500/20 text-${verdictColor}-300 border border-${verdictColor}-500/40">
+                  ${verdictIcon} ${data.verdict}
+                </span>
+                <span class="text-xs font-mono text-slate-400">Confidence: ${data.confidence_percentage}%</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+                ${isFake ? 'High-Risk Payment Spoof Detected' : (isGenuine ? 'Authentic Payment Receipt Verified' : 'Unconfirmed / Suspicious Transaction')}
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">${data.summary}</p>
+            </div>
+
+            <!-- Risk Score Indicator -->
+            <div class="flex-shrink-0 text-center px-4 py-3 rounded-xl bg-slate-950/70 border border-pink-500/25">
+              <div class="text-2xl sm:text-3xl font-extrabold font-mono text-${verdictColor}-400">${data.risk_score}<span class="text-xs text-slate-500 font-normal">/100</span></div>
+              <div class="text-[10px] uppercase font-mono tracking-wider text-slate-400">Tamper Score</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extracted Transaction Data Grid -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-mono uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+            <span>📋</span> Extracted Receipt Metadata
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 text-xs font-mono">
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">PAYMENT APP</span>
+              <span class="font-bold text-slate-200 truncate block">${data.extracted_data.app_detected || 'UPI'}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">AMOUNT</span>
+              <span class="font-bold text-pink-400 truncate block">${data.extracted_data.amount || 'N/A'}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">BENEFICIARY</span>
+              <span class="font-bold text-slate-200 truncate block">${data.extracted_data.payee_name || 'N/A'}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">UPI VPA ID</span>
+              <span class="font-bold text-slate-200 truncate block">${data.extracted_data.payee_upi || 'N/A'}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">UPI REF (UTR)</span>
+              <span class="font-bold ${isFake ? 'text-rose-400' : 'text-emerald-400'} truncate block">${data.extracted_data.utr_number || 'N/A'}</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/70 border border-pink-500/15">
+              <span class="text-slate-500 block text-[10px]">TIMESTAMP</span>
+              <span class="font-bold text-slate-200 truncate block">${data.extracted_data.timestamp || 'N/A'}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 Forensic Vectors Breakdown -->
+        <div class="space-y-3">
+          <h3 class="text-xs font-mono uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+            <span>🔬</span> 5-Point Forensic Inspection Vectors
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            ${checksHtml}
+          </div>
+        </div>
+
+        ${data.red_flags && data.red_flags.length > 0 ? `
+          <!-- Detected Red Flags -->
+          <div class="space-y-2">
+            <h3 class="text-xs font-mono uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+              <span>🚨</span> Detected Tampering Red Flags
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              ${redFlagsHtml}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Jensen Huang AI Advisor Spoken Audio Banner -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-pink-950/40 to-slate-900 border border-pink-500/30 flex flex-col sm:flex-row items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl overflow-hidden border border-pink-400/50 flex-shrink-0 shadow-lg">
+            <img src="/static/jensen.jpg" alt="Jensen Huang" class="w-full h-full object-cover" />
+          </div>
+          <div class="space-y-1 flex-grow text-center sm:text-left">
+            <div class="flex items-center justify-center sm:justify-start gap-2">
+              <span class="text-sm font-bold text-pink-300">Jensen Huang</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-pink-950 text-pink-300 border border-pink-500/30">AI Male Voice Alert</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed italic">"${data.advisor_speech}"</p>
+          </div>
+          <button 
+            id="btnSpeakPaymentVerdict"
+            class="px-4 py-2 rounded-xl bg-pink-500 hover:bg-pink-400 text-slate-950 font-bold text-xs shadow-md shadow-pink-500/20 transition flex items-center gap-1.5 cursor-pointer flex-shrink-0"
+          >
+            <span>🔊 Listen to Alert</span>
+          </button>
+        </div>
+
+        <!-- Merchant Anti-Fraud Checklist -->
+        <div class="p-4 rounded-xl bg-slate-950/80 border border-pink-500/20 text-xs text-slate-400 space-y-1.5 font-mono">
+          <div class="text-pink-300 font-bold flex items-center gap-1.5">
+            <span>🛡️</span> Merchant Protection Protocol:
+          </div>
+          <p>1. NEVER trust a buyer's screenshot alone — scammers use Spoof APKs to create instant fake payment screens.</p>
+          <p>2. Always wait for your bank SMS or UPI Soundbox confirmation before releasing goods.</p>
+          <p>3. If you suspect an attempt to defraud your store, call Police Emergency Helpline <strong>100</strong> immediately.</p>
+        </div>
+      `;
+
+      paymentResultCard.classList.remove('hidden');
+      paymentResultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Wire up speech button
+      const btnSpeakPaymentVerdict = document.getElementById('btnSpeakPaymentVerdict');
+      if (btnSpeakPaymentVerdict) {
+        btnSpeakPaymentVerdict.addEventListener('click', () => {
+          speakAiGirl(data.advisor_speech);
+        });
+      }
+
+      // Auto-speak Jensen alert
+      speakAiGirl(data.advisor_speech);
+    }
   </script>
 </body>
 </html>
